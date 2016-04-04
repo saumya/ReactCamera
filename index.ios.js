@@ -12,6 +12,8 @@ import React, {
   TouchableOpacity,
 } from 'react-native';
 
+import Camera from 'react-native-camera';
+
 class ReactWithProfiles extends Component {
   render() {
     return (
@@ -19,14 +21,24 @@ class ReactWithProfiles extends Component {
         <Text>
           Welcome to React Native and React camera.
         </Text>
-        <TouchableOpacity onPress={this._onPressButton}>
-          <Text style={styles.button}> Camera </Text>
-        </TouchableOpacity>
+        <Camera
+          ref={(cam) => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill}>
+          <Text style={styles.capture} onPress={this._onCameraButtonPress.bind(this)}>snap</Text>
+        </Camera>
+
+
       </View>
     );
   }
-  _onPressButton(){
-    alert('hi');
+  _onCameraButtonPress(){
+    //alert('hi');
+
+    this.camera.capture().then((data) =>alert(data)).catch(err =>alert(err));
+
   }
 }
 
@@ -36,17 +48,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#CCCCCC',
     top:22,
   },
-  button:{
-    backgroundColor: '#222222',
-    color: '#FFFFFF',
-    height:50,
-    width: 100,
-    textAlign: 'center',
-    fontSize: 20,
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
     padding: 10,
-    marginLeft:20,
-    marginTop:20,
-  }
+    margin: 40
+  },
+  preview:{
+    flex:1
+  },
+
 });
 
 AppRegistry.registerComponent('ReactWithProfiles', () => ReactWithProfiles);
