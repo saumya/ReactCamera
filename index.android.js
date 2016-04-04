@@ -8,44 +8,58 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity,
 } from 'react-native';
+
+import Camera from 'react-native-camera';
 
 class ReactWithProfiles extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
+        <Text>
+          Welcome to React Native and React camera.
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
+        <Camera
+          ref={(cam) => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill}>
+          <Text style={styles.capture} onPress={this._onCameraButtonPress.bind(this)}>snap</Text>
+        </Camera>
+
+
       </View>
     );
+  }
+  _onCameraButtonPress(){
+    //alert('hi');
+
+    this.camera.capture().then((data) =>alert(data)).catch(err =>alert(err));
+
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#CCCCCC',
+    top:22,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  preview:{
+    flex:1
   },
+
 });
 
 AppRegistry.registerComponent('ReactWithProfiles', () => ReactWithProfiles);
