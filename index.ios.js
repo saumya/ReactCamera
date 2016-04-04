@@ -16,7 +16,7 @@ class ReactWithProfiles extends Component {
     return (
       <View style={styles.container}>
         <Text>
-          Welcome to React Native!
+          Welcome to React Native and React camera.
         </Text>
       </View>
     );
