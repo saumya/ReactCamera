@@ -39,13 +39,8 @@ class ReactWithProfiles extends Component {
     );
   }
   _onCameraPress(data){
-    alert('Camera ! '+data);
-    //TODO: render the data / image we got from camera
-
+    //render the data / image we got from camera
     this.setState({photo:data});
-  }
-  _onGotCamImage(){
-    alert('_onGotCamImage');
   }
 }
 

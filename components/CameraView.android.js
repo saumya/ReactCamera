@@ -17,6 +17,8 @@ import Camera from 'react-native-camera';
 class CameraView extends Component {
   constructor(props){
     super(props);
+    this._onToggleButtonPress = this._onToggleButtonPress.bind(this);
+    this.state = {};
   }
   render() {
     return (
@@ -30,9 +32,10 @@ class CameraView extends Component {
             this.camera = cam;
           }}
           style={styles.preview}
-          aspect={Camera.constants.Aspect.fill} type={Camera.constants.Type.back}>
+          aspect={Camera.constants.Aspect.fill} type={this.state.camType}>
         </Camera>
-        <Text style={styles.capture} onPress={this._onCameraButtonPress.bind(this)}>snap{this.props.camName}</Text>
+        <Text style={styles.capture} onPress={this._onToggleButtonPress.bind(this)}>Front / Back</Text>
+        <Text style={styles.capture} onPress={this._onCameraButtonPress.bind(this)}>snap</Text>
 
       </View>
     );
@@ -42,6 +45,15 @@ class CameraView extends Component {
   }
   _onCameraButtonPress(){
     this.camera.capture().then((data) =>this.onGotImage(data)).catch(err =>alert(err));
+  }
+  _onToggleButtonPress(){
+    //this.camera.type = Camera.constants.Type.front;
+
+    if(this.state.camType===Camera.constants.Type.front){
+      this.setState({camType:Camera.constants.Type.back});
+    }else{
+      this.setState({camType:Camera.constants.Type.front});
+    }
   }
 }
 
