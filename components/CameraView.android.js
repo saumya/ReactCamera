@@ -30,7 +30,7 @@ class CameraView extends Component {
             this.camera = cam;
           }}
           style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
+          aspect={Camera.constants.Aspect.fill} type={Camera.constants.Type.back}>
         </Camera>
         <Text style={styles.capture} onPress={this._onCameraButtonPress.bind(this)}>snap{this.props.camName}</Text>
 
