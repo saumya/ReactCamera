@@ -21,24 +21,21 @@ class ReactWithProfiles extends Component {
         <Text>
           Welcome to React Native and React camera.
         </Text>
+
         <Camera
           ref={(cam) => {
             this.camera = cam;
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this._onCameraButtonPress.bind(this)}>snap</Text>
         </Camera>
-
+        <Text style={styles.capture} onPress={this._onCameraButtonPress.bind(this)}>snap</Text>
 
       </View>
     );
   }
   _onCameraButtonPress(){
-    //alert('hi');
-
     this.camera.capture().then((data) =>alert(data)).catch(err =>alert(err));
-
   }
 }
 
@@ -46,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#CCCCCC',
-    top:22,
+    top:0,
   },
   capture: {
     flex: 0,
@@ -54,7 +51,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     color: '#000',
     padding: 10,
-    margin: 40
+    margin: 4,
+    textAlign: "center",
+    fontSize: 20,
   },
   preview:{
     flex:1
