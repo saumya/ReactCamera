@@ -13,29 +13,27 @@ import React, {
 } from 'react-native';
 
 import Camera from 'react-native-camera';
+var CameraView = require('./components/CameraView');
 
 class ReactWithProfiles extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          Welcome to React Native and React camera.
-        </Text>
-
-        <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
-        </Camera>
-        <Text style={styles.capture} onPress={this._onCameraButtonPress.bind(this)}>snap</Text>
-
+        <TouchableOpacity onPress={ () => this._onCameraPress() }>
+          <Text style={ styles.cameraButton }>
+              { 'Camera' }
+          </Text>
+        </TouchableOpacity>
+        <CameraView onCamImage={this._onCameraPress} />
       </View>
     );
   }
-  _onCameraButtonPress(){
-    this.camera.capture().then((data) =>alert(data)).catch(err =>alert(err));
+  _onCameraPress(){
+    //alert('Camera !');
+    //alert(idCam);
+  }
+  _onGotCamImage(){
+    alert('_onGotCamImage');
   }
 }
 
@@ -44,6 +42,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#CCCCCC',
     top:0,
+  },
+  cameraButton: {
+    fontSize: 40,
   },
   capture: {
     flex: 0,
