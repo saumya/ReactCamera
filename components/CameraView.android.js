@@ -17,7 +17,6 @@ import Camera from 'react-native-camera';
 class CameraView extends Component {
   constructor(props){
     super(props);
-    this.props.onCamImage = this.onGotImage.bind(this);
   }
   render() {
     return (
@@ -39,7 +38,7 @@ class CameraView extends Component {
     );
   }
   onGotImage(data){
-    alert(data);
+    this.props.onCamImage(data);
   }
   _onCameraButtonPress(){
     this.camera.capture().then((data) =>this.onGotImage(data)).catch(err =>alert(err));

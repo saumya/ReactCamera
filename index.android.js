@@ -28,9 +28,9 @@ class ReactWithProfiles extends Component {
       </View>
     );
   }
-  _onCameraPress(){
-    //alert('Camera !');
-    //alert(idCam);
+  _onCameraPress(data){
+    alert('Camera ! '+data);
+    //TODO: render the data / image we got from camera
   }
   _onGotCamImage(){
     alert('_onGotCamImage');
